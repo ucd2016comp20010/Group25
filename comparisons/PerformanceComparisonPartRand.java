@@ -18,31 +18,35 @@ public class PerformanceComparisonPartRand {
         int[] size2 = new int[1000];
         int[] size3 = new int[10000];
 
-        for (int i = 0; i < size1.length/2; i++) {
-            size1[i] = i; // sorted int in ascending order
+        for (int i = 0; i < size1.length; i++) {
+            int binary = rand.nextInt(2); //dictate between whether it plugs a random or ordered value
+            if (binary == 0){
+                size1[i] = i; //inserts ordered value
+            }
+            else{
+                size1[i] = rand.nextInt(10000); //inserts random value
+            }
         }
 
-        for (int i = size1.length/2; i < size1.length; i++) {
-            size1[i] = rand.nextInt(size1.length/2, 10000);  // randomise the rest, limited between the size of array to 10000 to avoid duplicates
+        for (int i = 0; i < size2.length; i++) {
+            int binary = rand.nextInt(2);
+            if (binary == 0){
+                size2[i] = i;
+            }
+            else{
+                size2[i] = rand.nextInt(10000);
+            }
         }
 
-        for (int i = 0; i < size2.length/2; i++) {
-            size2[i] = i;
+        for (int i = 0; i < size3.length; i++) {
+            int binary = rand.nextInt(2);
+            if (binary == 0){
+                size3[i] = i;
+            }
+            else{
+                size3[i] = rand.nextInt(size1.length/2, 10000);
+            }
         }
-
-        for (int i = size2.length/2; i < size2.length; i++) {
-            size2[i] = rand.nextInt(size2.length/2, 10000);
-        }
-
-        for (int i = 0; i < size3.length/2; i++) {
-            size3[i] = i;
-        }
-
-        for (int i = size3.length/2; i < size3.length; i++) {
-            size3[i] = rand.nextInt(size3.length/2, 10000);
-        }
-
-
 
 
         long startTreap = System.nanoTime();
