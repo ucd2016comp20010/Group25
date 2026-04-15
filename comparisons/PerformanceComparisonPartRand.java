@@ -3,7 +3,8 @@ import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
 
 import java.util.Random;
-public class PerformanceComparison {
+
+public class PerformanceComparisonPartRand {
 
     public static void main(String[] args) {
 
@@ -17,20 +18,32 @@ public class PerformanceComparison {
         int[] size2 = new int[1000];
         int[] size3 = new int[10000];
 
-        // Fill size1
-        for (int i = 0; i < size1.length; i++) {
-            size1[i] = rand.nextInt(0,10000); // Random int between 0 and 9999
+        for (int i = 0; i < size1.length/2; i++) {
+            size1[i] = i; // sorted int in ascending order
         }
 
-        // Fill size2
-        for (int i = 0; i < size2.length; i++) {
-            size2[i] = rand.nextInt(0, 10000); // Random int between 0 and 9999
+        for (int i = size1.length/2; i < size1.length; i++) {
+            size1[i] = rand.nextInt(size1.length/2, 10000);  // randomise the rest, limited between the size of array to 10000 to avoid duplicates
         }
 
-        // Fill size3
-        for (int i = 0; i < size3.length; i++) {
-            size3[i] = rand.nextInt(0, 10000); // Random int between 0 and 9999
+        for (int i = 0; i < size2.length/2; i++) {
+            size2[i] = i; // sorted int in ascending order
         }
+
+        for (int i = size2.length/2; i < size2.length; i++) {
+            size2[i] = rand.nextInt(size2.length/2, 10000);
+        }
+
+        for (int i = 0; i < size3.length/2; i++) {
+            size3[i] = i; // sorted int in ascending order
+        }
+
+        for (int i = size3.length/2; i < size3.length; i++) {
+            size3[i] = rand.nextInt(size3.length/2, 10000);
+        }
+
+
+
 
         long startTreap = System.nanoTime();
         for (int j = 0; j < size1.length; j++) {
@@ -38,7 +51,7 @@ public class PerformanceComparison {
             treap.put(value, value);
         }
         long endTreap = System.nanoTime();
-        System.out.println("TreapMap with size 10: " + (endTreap - startTreap) + " ns");
+        System.out.println("TreapMap with size 100: " + (endTreap - startTreap) + " ns");
 
         long startTreap2 = System.nanoTime();
         for (int j = 0; j < size2.length; j++) {
@@ -46,7 +59,7 @@ public class PerformanceComparison {
             treap.put(value, value);
         }
         long endTreap2 = System.nanoTime();
-        System.out.println("TreapMap with size 100: " + (endTreap2 - startTreap2) + " ns");
+        System.out.println("TreapMap with size 1000: " + (endTreap2 - startTreap2) + " ns");
 
         long startTreap3 = System.nanoTime();
         for (int j = 0; j < size3.length; j++) {
@@ -54,7 +67,7 @@ public class PerformanceComparison {
             treap.put(value, value);
         }
         long endTreap3 = System.nanoTime();
-        System.out.println("TreapMap with size 1000: " + (endTreap3 - startTreap3) + " ns");
+        System.out.println("TreapMap with size 10000: " + (endTreap3 - startTreap3) + " ns");
 
 
         long startAVLTree = System.nanoTime();
@@ -63,7 +76,7 @@ public class PerformanceComparison {
             avlTree.put(value, value);
         }
         long endAVLTree = System.nanoTime();
-        System.out.println("AVLTree with size 10: " + (endAVLTree - startAVLTree) + " ns");
+        System.out.println("AVLTree with size 100: " + (endAVLTree - startAVLTree) + " ns");
 
         long startAVLTree2 = System.nanoTime();
         for (int j = 0; j < size2.length; j++) {
@@ -71,7 +84,7 @@ public class PerformanceComparison {
             avlTree.put(value, value);
         }
         long endAVLTree2 = System.nanoTime();
-        System.out.println("AVLTree with size 100: " + (endAVLTree2 - startAVLTree2) + " ns");
+        System.out.println("AVLTree with size 1000: " + (endAVLTree2 - startAVLTree2) + " ns");
 
         long startAVLTree3 = System.nanoTime();
         for (int j = 0; j < size3.length; j++) {
@@ -79,7 +92,21 @@ public class PerformanceComparison {
             avlTree.put(value, value);
         }
         long endAVLTree3 = System.nanoTime();
-        System.out.println("AVLTree with size 100: " + (endAVLTree3 - startAVLTree3) + " ns");
+        System.out.println("AVLTree with size 10000: " + (endAVLTree3 - startAVLTree3) + " ns");
+
+
+
+        for (int i = 0; i < size1.length; i++) {
+            size1[i] = i; // sorted int in ascending order
+        }
+
+        for (int i = 0; i < size2.length; i++) {
+            size2[i] = i;
+        }
+
+        for (int i = 0; i < size3.length; i++) {
+            size3[i] = i;
+        }
 
 
 
