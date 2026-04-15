@@ -3,7 +3,7 @@ import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
 
 import java.util.Random;
-public class PerformanceComparison {
+public class PerformanceComparisonRand {
 
     public static void main(String[] args) {
 

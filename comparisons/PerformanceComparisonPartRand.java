@@ -27,7 +27,7 @@ public class PerformanceComparisonPartRand {
         }
 
         for (int i = 0; i < size2.length/2; i++) {
-            size2[i] = i; // sorted int in ascending order
+            size2[i] = i;
         }
 
         for (int i = size2.length/2; i < size2.length; i++) {
@@ -35,7 +35,7 @@ public class PerformanceComparisonPartRand {
         }
 
         for (int i = 0; i < size3.length/2; i++) {
-            size3[i] = i; // sorted int in ascending order
+            size3[i] = i;
         }
 
         for (int i = size3.length/2; i < size3.length; i++) {
