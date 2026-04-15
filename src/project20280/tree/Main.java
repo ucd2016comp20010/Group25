@@ -1,4 +1,4 @@
-package project20280;
+package project20280.tree;
 
 import project20280.tree.TreapMap;
 

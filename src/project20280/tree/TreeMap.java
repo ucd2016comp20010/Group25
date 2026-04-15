@@ -8,7 +8,7 @@ import java.util.Comparator;
 
 public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
-    protected static class BalanceableBinaryTree<K, V> extends LinkedBinaryTree<Entry<K, V>> {
+    public static class BalanceableBinaryTree<K, V> extends LinkedBinaryTree<Entry<K, V>> {
         protected static class BSTNode<E> extends Node<E> {
             int aux = 0;
 
@@ -82,7 +82,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         }
     }
 
-    protected BalanceableBinaryTree<K, V> tree = new BalanceableBinaryTree<>();
+    public BalanceableBinaryTree<K, V> tree = new BalanceableBinaryTree<>();
 
     public TreeMap() {
         super();
@@ -115,7 +115,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         tree.addRight(p, null);
     }
 
-    protected Position<Entry<K, V>> root() {
+    public Position<Entry<K, V>> root() {
         return tree.root();
     }
 
@@ -123,11 +123,11 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         return tree.parent(p);
     }
 
-    protected Position<Entry<K, V>> left(Position<Entry<K, V>> p) {
+    public Position<Entry<K, V>> left(Position<Entry<K, V>> p) {
         return tree.left(p);
     }
 
-    protected Position<Entry<K, V>> right(Position<Entry<K, V>> p) {
+    public Position<Entry<K, V>> right(Position<Entry<K, V>> p) {
         return tree.right(p);
     }
 
@@ -139,11 +139,11 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         return tree.isRoot(p);
     }
 
-    protected boolean isExternal(Position<Entry<K, V>> p) {
+    public boolean isExternal(Position<Entry<K, V>> p) {
         return p == null || p.getElement() == null;
     }
 
-    protected boolean isInternal(Position<Entry<K, V>> p) {
+    public boolean isInternal(Position<Entry<K, V>> p) {
         return p != null && p.getElement() != null;
     }
 
