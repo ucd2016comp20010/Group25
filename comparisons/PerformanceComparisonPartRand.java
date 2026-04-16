@@ -11,7 +11,7 @@ public class PerformanceComparisonPartRand {
     public static void main(String[] args) {
 
         Random rand = new Random();
-        long startTimer, endTimer = System.nanoTime();
+        long startTimer, endTimer;
 
         //three different trees of each type to demonstrate input response time.
         TreapMap<Integer, Integer> treap100 = new TreapMap<>();

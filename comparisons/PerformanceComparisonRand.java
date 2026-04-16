@@ -9,7 +9,9 @@ public class PerformanceComparisonRand {
 
     public static void main(String[] args) {
 
+
         Random rand = new Random();
+        long startTimer, endTimer;
 
         //three different trees of each type to demonstrate input response time.
         TreapMap<Integer, Integer> treap100 = new TreapMap<>();
@@ -51,11 +53,11 @@ public class PerformanceComparisonRand {
         for(String currMode : mode){
             switch(currMode){
                 case "add": //this builds the tree to begin our measurements.
-                    long startTimer = System.nanoTime();
+                    startTimer = System.nanoTime();
                     for (int value : size1) {
                         treap100.put(value, value);
                     }
-                    long endTimer = System.nanoTime();
+                    endTimer = System.nanoTime();
                     System.out.println("TreapMap with size 100: " + (endTimer - startTimer) + " ns");
 
                     startTimer = System.nanoTime(); //timer is declared again to reset it
