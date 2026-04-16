@@ -12,7 +12,9 @@ public class PerformanceComparisonPartRand {
 
         Random rand = new Random();
 
-        TreapMap<Integer, Integer> treap = new TreapMap<>();
+        TreapMap<Integer, Integer> treap100 = new TreapMap<>();
+        TreapMap<Integer, Integer> treap1000 = new TreapMap<>();
+        TreapMap<Integer, Integer> treap10000 = new TreapMap<>();
         AVLTreeMap<Integer, Integer> avlTree = new AVLTreeMap<>();
         TreeMap<Integer, Integer> javaTree = new TreeMap<>();
 
@@ -22,26 +24,6 @@ public class PerformanceComparisonPartRand {
         int[] size3 = new int[10000];
 
         String[] mode = {"build", "add", "search", "remove", "traverse"};
-
-        for(String currMode : mode){
-
-            switch(currMode){
-                case "build":
-                    break;
-                case "add":
-                    break;
-                case "search":
-                    break;
-                case "remove":
-                    break;
-                case "traverse":
-                    break;
-                default:
-                    break;
-            }
-
-
-        }
 
         for (int i = 0; i < size1.length; i++) {
             int binary = rand.nextInt(2); //dictate between whether it plugs a random or ordered value
@@ -75,29 +57,50 @@ public class PerformanceComparisonPartRand {
 
 
 
-        long startTreap = System.nanoTime();
-        for (int j = 0; j < size1.length; j++) {
-            int value = size1[j];
-            treap.put(value, value);
-        }
-        long endTreap = System.nanoTime();
-        System.out.println("TreapMap with size 100: " + (endTreap - startTreap) + " ns");
+        for(String currMode : mode){
+            switch(currMode){
+                case "build":
+                    long startTreap = System.nanoTime();
+                    for (int value : size1) {
+                        treap100.put(value, value);
+                    }
+                    long endTreap = System.nanoTime();
+                    System.out.println("TreapMap with size 100: " + (endTreap - startTreap) + " ns");
 
-        long startTreap2 = System.nanoTime();
-        for (int j = 0; j < size2.length; j++) {
-            int value = size2[j];
-            treap.put(value, value);
-        }
-        long endTreap2 = System.nanoTime();
-        System.out.println("TreapMap with size 1000: " + (endTreap2 - startTreap2) + " ns");
+                    long startTreap2 = System.nanoTime();
+                    for (int value : size2) {
+                        treap1000.put(value, value);
+                    }
+                    long endTreap2 = System.nanoTime();
+                    System.out.println("TreapMap with size 1000: " + (endTreap2 - startTreap2) + " ns");
 
-        long startTreap3 = System.nanoTime();
-        for (int j = 0; j < size3.length; j++) {
-            int value = size3[j];
-            treap.put(value, value);
+                    long startTreap3 = System.nanoTime();
+                    for (int value : size3) {
+                        treap1000.put(value, value);
+                    }
+                    long endTreap3 = System.nanoTime();
+                    System.out.println("TreapMap with size 10000: " + (endTreap3 - startTreap3) + " ns");
+                    break;
+                case "add":
+                    break;
+                case "search":
+                    break;
+                case "remove":
+                    break;
+                case "traverse":
+                    break;
+                default:
+                    break;
+            }
+
+
         }
-        long endTreap3 = System.nanoTime();
-        System.out.println("TreapMap with size 10000: " + (endTreap3 - startTreap3) + " ns");
+
+
+
+
+
+
 
 
         long startAVLTree = System.nanoTime();
