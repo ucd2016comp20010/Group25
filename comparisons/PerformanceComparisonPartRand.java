@@ -21,6 +21,28 @@ public class PerformanceComparisonPartRand {
         int[] size2 = new int[1000];
         int[] size3 = new int[10000];
 
+        String[] mode = {"build", "add", "search", "remove", "traverse"};
+
+        for(String currMode : mode){
+
+            switch(currMode){
+                case "build":
+                    break;
+                case "add":
+                    break;
+                case "search":
+                    break;
+                case "remove":
+                    break;
+                case "traverse":
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
         for (int i = 0; i < size1.length; i++) {
             int binary = rand.nextInt(2); //dictate between whether it plugs a random or ordered value
             if (binary == 0){
