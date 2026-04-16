@@ -25,11 +25,11 @@ public class PerformanceComparisonPartRand {
         TreeMap<Integer, Integer> javaTree10000 = new TreeMap<>();
 
         // Created 3 arrays of 3 different sizes
-        int[] size1 = new int[200];
-        int[] size2 = new int[2000];
-        int[] size3 = new int[20000];
+        int[] size1 = new int[100];
+        int[] size2 = new int[1000];
+        int[] size3 = new int[10000];
 
-        String[] mode = {"add", "search", "remove", "traverse"};
+        String[] mode = {"add", "remove", "search", "traverse"};
 
         for (int i = 0; i < size1.length; i++) {
             int binary = rand.nextInt(2); //dictate between whether it plugs a random or ordered value
@@ -85,51 +85,64 @@ public class PerformanceComparisonPartRand {
                         treap10000.put(value, value);
                     }
                     endTimer = System.nanoTime();
-                    System.out.println("TreapMap with size 10000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("TreapMap with size 10000: " + (endTimer - startTimer) + " ns\n");
+
+
+                    //AVLTree
+                    startTimer = System.nanoTime();
+                    for (int value : size1) {
+                        avlTree100.put(value, value);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("AVLTree with size 100: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime(); //timer is declared again to reset it
+                    for (int value : size2) {
+                        avlTree1000.put(value, value);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("AVLTree with size 1000: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int value : size3) {
+                        avlTree10000.put(value, value);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("AVLTree with size 10000: " + (endTimer - startTimer) + " ns\n");
+
+
+                    //JavaTree
+                    startTimer = System.nanoTime();
+                    for (int value : size1) {
+                        javaTree100.put(value, value);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("JavaTree with size 100: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime(); //timer is declared again to reset it
+                    for (int value : size2) {
+                        javaTree1000.put(value, value);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("JavaTree with size 1000: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int value : size3) {
+                        javaTree10000.put(value, value);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("JavaTree with size 10000: " + (endTimer - startTimer) + " ns");
+
                     break;
                 case "search":
                     break;
-                case "remove":
-                    break;
                 case "traverse":
+                    break;
+                case "remove":
                     break;
                 default:
                     break;
             }
-
-
         }
-
-
-
-
-
-
-
-
-        long startAVLTree = System.nanoTime();
-        for (int j = 0; j < size1.length; j++) {
-            int value = size1[j];
-            avlTree100.put(value, value);
-        }
-        long endAVLTree = System.nanoTime();
-        System.out.println("AVLTree with size 100: " + (endAVLTree - startAVLTree) + " ns");
-
-        long startAVLTree2 = System.nanoTime();
-        for (int j = 0; j < size2.length; j++) {
-            int value = size2[j];
-            avlTree1000.put(value, value);
-        }
-        long endAVLTree2 = System.nanoTime();
-        System.out.println("AVLTree with size 1000: " + (endAVLTree2 - startAVLTree2) + " ns");
-
-        long startAVLTree3 = System.nanoTime();
-        for (int j = 0; j < size3.length; j++) {
-            int value = size3[j];
-            avlTree10000.put(value, value);
-        }
-        long endAVLTree3 = System.nanoTime();
-        System.out.println("AVLTree with size 10000: " + (endAVLTree3 - startAVLTree3) + " ns");
-
     }
 }
