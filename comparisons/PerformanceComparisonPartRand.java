@@ -12,6 +12,7 @@ public class PerformanceComparisonPartRand {
 
         Random rand = new Random();
 
+        //three different trees of each type to demonstrate input response time.
         TreapMap<Integer, Integer> treap100 = new TreapMap<>();
         TreapMap<Integer, Integer> treap1000 = new TreapMap<>();
         TreapMap<Integer, Integer> treap10000 = new TreapMap<>();
@@ -29,6 +30,7 @@ public class PerformanceComparisonPartRand {
         int[] size2 = new int[1000];
         int[] size3 = new int[10000];
 
+        //mode used for switch case, written in string to convey what they do
         String[] mode = {"add", "remove", "search", "traverse"};
 
         for (int i = 0; i < size1.length; i++) {
@@ -134,13 +136,13 @@ public class PerformanceComparisonPartRand {
                     System.out.println("JavaTree with size 10000: " + (endTimer - startTimer) + " ns");
 
                     break;
-                case "search":
+                case "search": //search for certain values within the trees, measure both success and unsuccess clicks
                     break;
-                case "traverse":
+                case "traverse": //go through the entire tree and declare how long it takes to traverse
                     break;
-                case "remove":
+                case "remove": //measure how long it takes to remove the entire tree, this is the last switch for an obvious
                     break;
-                default:
+                default: //if none of these strings are met, the program will automatically end via default
                     break;
             }
         }
