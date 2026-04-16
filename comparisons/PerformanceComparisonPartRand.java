@@ -1,6 +1,7 @@
 package project20280.tree.comparisons;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
+import project20280.tree.TreeMap;
 
 import java.util.Random;
 
@@ -12,6 +13,7 @@ public class PerformanceComparisonPartRand {
 
         TreapMap<Integer, Integer> treap = new TreapMap<>();
         AVLTreeMap<Integer, Integer> avlTree = new AVLTreeMap<>();
+        TreeMap<Integer, Integer> javaTree = new TreeMap<>();
 
         // Created 3 arrays of 3 different sizes
         int[] size1 = new int[100];
@@ -97,25 +99,6 @@ public class PerformanceComparisonPartRand {
         }
         long endAVLTree3 = System.nanoTime();
         System.out.println("AVLTree with size 10000: " + (endAVLTree3 - startAVLTree3) + " ns");
-
-
-
-        for (int i = 0; i < size1.length; i++) {
-            size1[i] = i; // sorted int in ascending order
-        }
-
-        for (int i = 0; i < size2.length; i++) {
-            size2[i] = i;
-        }
-
-        for (int i = 0; i < size3.length; i++) {
-            size3[i] = i;
-        }
-
-
-
-
-
 
     }
 }
