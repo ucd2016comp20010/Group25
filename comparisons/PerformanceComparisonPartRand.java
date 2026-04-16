@@ -1,9 +1,10 @@
 package project20280.tree.comparisons;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
-import project20280.tree.TreeMap;
+
 
 import java.util.Random;
+import java.util.TreeMap;
 
 public class PerformanceComparisonPartRand {
 
@@ -49,6 +50,7 @@ public class PerformanceComparisonPartRand {
                 size3[i] = rand.nextInt(size1.length/2, 10000);
             }
         }
+
 
 
         long startTreap = System.nanoTime();
