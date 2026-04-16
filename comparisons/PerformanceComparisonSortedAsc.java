@@ -2,6 +2,7 @@ package project20280.tree.comparisons;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 public class PerformanceComparisonSortedAsc {
@@ -112,7 +113,7 @@ public class PerformanceComparisonSortedAsc {
                         javaTree10000.put(value, value);
                     }
                     endTimer = System.nanoTime();
-                    System.out.println("JavaTree with size 10000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("JavaTree with size 10000: " + (endTimer - startTimer) + " ns\n\n----\n");
 
                     break;
                 case "search": //search for certain values within the trees, measure both success and unsuccess clicks
@@ -120,6 +121,73 @@ public class PerformanceComparisonSortedAsc {
                 case "traverse": //go through the entire tree and declare how long it takes to traverse
                     break;
                 case "remove": //measure how long it takes to remove the entire tree, this is the last switch for an obvious
+                    //Treap
+                    startTimer = System.nanoTime();
+                    for (int i = size1.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
+                        treap100.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed TreapMap with size 100: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int i = size2.length; i > 0; i--) {
+                        treap1000.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed TreapMap with size 1000: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int i = size3.length; i > 0; i--) {
+                        treap10000.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed TreapMap with size 10000: " + (endTimer - startTimer) + " ns\n");
+
+                    /*
+                    startTimer = System.nanoTime();
+                    for (int i = size1.length; i > 0; i--) {
+                        avlTree100.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed AVLTree with size 100: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int i = size2.length; i > 0; i--) {
+                        avlTree1000.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed AVLTree with size 1000: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int i = size3.length; i > 0; i--) {
+                        avlTree10000.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed AVLTree with size 10000: " + (endTimer - startTimer) + " ns\n");
+                    */
+
+                    //JavaTreeMa[
+                    startTimer = System.nanoTime();
+                    for (int i = size1.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
+                        javaTree100.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed JavaTree with size 100: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int i = size2.length; i > 0; i--) {
+                        javaTree1000.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed JavaTree with size 1000: " + (endTimer - startTimer) + " ns");
+
+                    startTimer = System.nanoTime();
+                    for (int i = size3.length; i > 0; i--) {
+                        javaTree10000.remove(i);
+                    }
+                    endTimer = System.nanoTime();
+                    System.out.println("Removed JavaTree with size 10000: " + (endTimer - startTimer) + " ns");
+
                     break;
                 default: //if none of these strings are met, the program will automatically end via default
                     break;
