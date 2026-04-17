@@ -192,11 +192,10 @@ public class PerformanceComparisonSortedDes {
                     endTimer = System.nanoTime();
                     System.out.println("Failed AVLTree Search with size 1000: " + (endTimer - startTimer) + " ns");
 
-                    /*
+
                     startTimer = System.nanoTime();
                     avlTree10000.get(-1);
                     endTimer = System.nanoTime();
-                    */
                     System.out.println("Failed AVLTree Search with size 10000 throws a StackOverflowError\n");
 
 
@@ -242,7 +241,6 @@ public class PerformanceComparisonSortedDes {
                     endTimer = System.nanoTime();
                     System.out.println("Removed TreapMap with size 10000: " + (endTimer - startTimer) + " ns\n");
 
-                    /*
                     startTimer = System.nanoTime();
                     for (int i = size1.length; i > 0; i--) {
                         avlTree100.remove(i);
@@ -263,7 +261,6 @@ public class PerformanceComparisonSortedDes {
                     }
                     endTimer = System.nanoTime();
                     System.out.println("Removed AVLTree with size 10000: " + (endTimer - startTimer) + " ns\n");
-                    */
 
                     //JavaTreeMa[
                     startTimer = System.nanoTime();
