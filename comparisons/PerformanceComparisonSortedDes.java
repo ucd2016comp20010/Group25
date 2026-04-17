@@ -205,7 +205,7 @@ public class PerformanceComparisonSortedDes {
                 case "search": //search for certain values within the trees, measure both success and unsuccess clicks
                     searchTreap(treap100, size1);
                     searchTreap(treap1000, size2);
-                    searchTreap(treap1000, size3);
+                    searchTreap(treap10000, size3);
                     System.out.println();
                     searchAVLTreeMap(avlTree100, size1);
                     searchAVLTreeMap(avlTree1000, size2);
