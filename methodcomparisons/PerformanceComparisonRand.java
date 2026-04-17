@@ -1,15 +1,14 @@
-package project20280.tree.comparisons;
+package project20280.tree.methodcomparisons;
 import project20280.interfaces.Entry;
-import project20280.interfaces.Tree;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
-
 
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-public class PerformanceComparisonPartRand {
+public class PerformanceComparisonRand {
+
 
     //add methods
     public static void buildTreeTreap(TreapMap<Integer, Integer> a, int[] b){
@@ -161,33 +160,16 @@ public class PerformanceComparisonPartRand {
         String[] mode = {"add", "search", "traverse", "remove"};
 
         for (int i = 0; i < size1.length; i++) {
-            int binary = rand.nextInt(2); //dictate between whether it plugs a random or ordered value
-            if (binary == 0){
-                size1[i] = i; //inserts ordered value
-            }
-            else{
                 size1[i] = rand.nextInt(10000); //inserts random value
-            }
         }
 
         for (int i = 0; i < size2.length; i++) {
-            int binary = rand.nextInt(2);
-            if (binary == 0){
-                size2[i] = i;
-            }
-            else{
                 size2[i] = rand.nextInt(10000);
-            }
+
         }
 
         for (int i = 0; i < size3.length; i++) {
-            int binary = rand.nextInt(2);
-            if (binary == 0){
-                size3[i] = i;
-            }
-            else{
                 size3[i] = rand.nextInt(size1.length/2, 10000);
-            }
         }
 
 

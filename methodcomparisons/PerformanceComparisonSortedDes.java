@@ -1,4 +1,4 @@
-package project20280.tree.comparisons;
+package project20280.tree.methodcomparisons;
 import project20280.interfaces.Entry;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
