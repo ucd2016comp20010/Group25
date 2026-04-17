@@ -6,6 +6,9 @@ import project20280.tree.TreapMap;
 import java.util.Random;
 import java.util.TreeMap;
 
+
+
+
 public class PerformanceComparisonPartRand {
 
     public static void main(String[] args) {
@@ -32,7 +35,7 @@ public class PerformanceComparisonPartRand {
         int[] size3 = new int[10000];
 
         //mode used for switch case, written in string to convey what they do
-        String[] mode = {"add", "remove", "search", "traverse"};
+        String[] mode = {"add", "search", "traverse", "remove"};
 
         for (int i = 0; i < size1.length; i++) {
             int binary = rand.nextInt(2); //dictate between whether it plugs a random or ordered value
