@@ -1,14 +1,141 @@
 package project20280.tree.comparisons;
+import project20280.interfaces.Entry;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
 
+import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 public class PerformanceComparisonSortedDes {
 
+    //add methods
+    public static void buildTreeTreap(TreapMap<Integer, Integer> a, int[] b){
+        long start = System.nanoTime();
+        for (int value : b) {
+            a.put(value, value);
+        }
+        long end = System.nanoTime();
+        System.out.println("TreapMap with size " + b.length + ": " + (end - start) +  " ns");
+    }
+
+    public static void buildTreeAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b){
+        long start = System.nanoTime();
+        for (int value : b) {
+            a.put(value, value);
+        }
+        long end = System.nanoTime();
+        System.out.println("AVLTreeMap with size " + b.length + ": " + (end - start) +  " ns");
+    }
+
+    public static void buildTreeJavaTreeMap(TreeMap<Integer, Integer> a, int[] b) {
+        long start = System.nanoTime();
+        for (int value : b) {
+            a.put(value, value);
+        }
+        long end = System.nanoTime();
+        System.out.println("JavaTreeMap with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+    //search methods
+    public static void searchTreap(TreapMap<Integer, Integer> a, int[] b) {
+        long start = System.nanoTime();
+        a.get(b[b.length/2]); //this will search for a value referenced in the middle of the array
+        long end = System.nanoTime();
+        System.out.println("Successful JavaTree Search with size " + b.length + ": " + (end - start) + " ns");
+
+        start = System.nanoTime();
+        a.get(-1); //this is a number that's not present in any of the trees, might be inconsistent for random.
+        end = System.nanoTime();
+        System.out.println("Failed Treap Search with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+    public static void searchAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b) {
+        long start = System.nanoTime();
+        a.get(b[b.length/2]);
+        long end = System.nanoTime();
+        System.out.println("Successful JavaTree Search with size " + b.length + ": " + (end - start) + " ns");
+
+        start = System.nanoTime();
+        a.get(-1);
+        end = System.nanoTime();
+        System.out.println("Failed Treap Search with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+    public static void searchJavaTreeMap(TreeMap<Integer, Integer> a, int[] b) {
+        long start = System.nanoTime();
+        a.get(b[b.length/2]);
+        long end = System.nanoTime();
+        System.out.println("Successful JavaTree Search with size " + b.length + ": " + (end - start) + " ns");
+
+        start = System.nanoTime();
+        a.get(-1);
+        end = System.nanoTime();
+        System.out.println("Failed Treap Search with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+    //traverse method
+    public static void traverseTreap(TreapMap<Integer, Integer> a, int[] b) {
+        long start = System.nanoTime();
+        for (Entry<Integer, Integer> value : a.entrySet()) { //this should iterate through every element present, I used this code: https://www.geeksforgeeks.org/java/how-to-iterate-over-a-treemap-in-java/
+            int i = 1;
+        }
+        long end = System.nanoTime();
+        System.out.println("Traversed TreapMap with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+    public static void traverseAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b) {
+        long start = System.nanoTime();
+        for (Entry<Integer, Integer> value : a.entrySet()) { //this should iterate through every element present, I used this code: https://www.geeksforgeeks.org/java/how-to-iterate-over-a-treemap-in-java/
+            int i = 1;
+        }
+        long end = System.nanoTime();
+        System.out.println("Traversed TreapMap with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+    public static void traverseJavaTree(TreeMap<Integer, Integer> a, int[] b){
+        long start = System.nanoTime();
+        for(Map.Entry<Integer, Integer> value : a.entrySet()){ //this should iterate through every element present, I used this code: https://www.geeksforgeeks.org/java/how-to-iterate-over-a-treemap-in-java/
+            int i = 1;
+        }
+        long end = System.nanoTime();
+        System.out.println("Traversed TreeMap with size " + b.length + ": " + (end - start) +  " ns");
+    }
+
+
+    //remove method
+    public static void removeTreap(TreapMap<Integer, Integer> a, int[] b){
+        long start = System.nanoTime();
+        for (int i = b.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
+            a.remove(i);
+        }
+        long end = System.nanoTime();
+        System.out.println("Removed TreapMap with size " + b.length + ": " + (end - start) +  " ns");
+    }
+
+    public static void removeAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b){
+        long start = System.nanoTime();
+        for (int i = b.length; i > 0; i--) {
+            a.remove(i);
+        }
+        long end = System.nanoTime();
+        System.out.println("Removed AVLTreeMap with size " + b.length + ": " + (end - start) +  " ns");
+    }
+
+    public static void removeJavaTreeMap(TreeMap<Integer, Integer> a, int[] b) {
+        long start = System.nanoTime();
+        for (int i = b.length; i > 0; i--) {
+            a.remove(i);
+        }
+        long end = System.nanoTime();
+        System.out.println("Removed JavaTreeMap with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+
+
     public static void main(String[] args) {
 
-        long startTimer, endTimer;
+        Random rand = new Random();
 
         //three different trees of each type to demonstrate input response time.
         TreapMap<Integer, Integer> treap100 = new TreapMap<>();
@@ -32,7 +159,7 @@ public class PerformanceComparisonSortedDes {
         String[] mode = {"add", "search", "traverse", "remove"};
 
         for (int i = 0; i < size1.length; i++) {
-            size1[i] = size1.length-i; // sorted int in ascending order
+            size1[i] = size1.length-i; //inserts ordered value
         }
 
         for (int i = 0; i < size2.length; i++) {
@@ -43,247 +170,64 @@ public class PerformanceComparisonSortedDes {
             size3[i] = size3.length-i;
         }
 
+
         //mode change, this for loop goes through each mode in order
         for(String currMode : mode){
             switch(currMode){
                 case "add": //this builds the tree to begin our measurements.
-                    startTimer = System.nanoTime();
-                    for (int value : size1) {
-                        treap100.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("TreapMap with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime(); //timer is declared again to reset it
-                    for (int value : size2) {
-                        treap1000.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("TreapMap with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int value : size3) {
-                        treap10000.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("TreapMap with size 10000: " + (endTimer - startTimer) + " ns\n");
-
-
-                    //AVLTree
-                    startTimer = System.nanoTime();
-                    for (int value : size1) {
-                        avlTree100.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("AVLTree with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime(); //timer is declared again to reset it
-                    for (int value : size2) {
-                        avlTree1000.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("AVLTree with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int value : size3) {
-                        avlTree10000.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("AVLTree with size 10000: " + (endTimer - startTimer) + " ns\n");
-
-
-                    //JavaTree
-                    startTimer = System.nanoTime();
-                    for (int value : size1) {
-                        javaTree100.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("JavaTree with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime(); //timer is declared again to reset it
-                    for (int value : size2) {
-                        javaTree1000.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("JavaTree with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int value : size3) {
-                        javaTree10000.put(value, value);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("JavaTree with size 10000: " + (endTimer - startTimer) + " ns\n\n----\n");
-
+                    buildTreeTreap(treap100, size1);
+                    buildTreeTreap(treap1000, size2);
+                    buildTreeTreap(treap10000, size3);
+                    System.out.println();
+                    buildTreeAVLTreeMap(avlTree100, size1);
+                    buildTreeAVLTreeMap(avlTree1000, size2);
+                    buildTreeAVLTreeMap(avlTree10000, size3);
+                    System.out.println();
+                    buildTreeJavaTreeMap(javaTree100, size1);
+                    buildTreeJavaTreeMap(javaTree1000, size2);
+                    buildTreeJavaTreeMap(javaTree10000, size3);
+                    System.out.println("\n-----\n");
                     break;
                 case "search": //search for certain values within the trees, measure both success and unsuccess clicks
-                    //successful search, treap
-                    startTimer = System.nanoTime();
-                    treap100.get(size1[50]); //this will search for a value referenced in the middle of the array
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful Treap Search with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    treap1000.get(size2[500]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful Treap Search with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    treap10000.get(size3[5000]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful Treap Search with size 10000: " + (endTimer - startTimer) + " ns\n");
-
-                    //avltree
-                    startTimer = System.nanoTime();
-                    avlTree100.get(size1[50]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful AVLTree Search with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    avlTree1000.get(size2[500]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful AVLTree Search with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    avlTree10000.get(size3[5000]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful AVLTree Search with size 10000: " + (endTimer - startTimer) + " ns\n");
-
-                    //javatree
-                    startTimer = System.nanoTime();
-                    javaTree100.get(size1[50]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful JavaTree Search with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    javaTree1000.get(size2[500]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful JavaTree Search with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    javaTree10000.get(size3[5000]);
-                    endTimer = System.nanoTime();
-                    System.out.println("Successful JavaTree Search with size 10000: " + (endTimer - startTimer) + " ns\n\n");
-
-
-                    //failed search
-                    startTimer = System.nanoTime();
-                    treap100.get(-1); //this is a number that's not present in any of the trees, might be inconsistent for random.
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed Treap Search with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    treap1000.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed Treap Search with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    treap10000.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed Treap Search with size 10000: " + (endTimer - startTimer) + " ns\n");
-
-                    //avltree
-                    startTimer = System.nanoTime();
-                    avlTree100.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed AVLTree Search with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    avlTree1000.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed AVLTree Search with size 1000: " + (endTimer - startTimer) + " ns");
-
-
-                    startTimer = System.nanoTime();
-                    avlTree10000.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed AVLTree Search with size 10000 throws a StackOverflowError\n");
-
-
-                    //javatree
-                    startTimer = System.nanoTime();
-                    javaTree100.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed JavaTree Search with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    javaTree1000.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed JavaTree Search with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    javaTree10000.get(-1);
-                    endTimer = System.nanoTime();
-                    System.out.println("Failed JavaTree Search with size 10000: " + (endTimer - startTimer) + " ns\n\n----\n");
-
+                    searchTreap(treap100, size1);
+                    searchTreap(treap1000, size2);
+                    searchTreap(treap1000, size3);
+                    System.out.println();
+                    searchAVLTreeMap(avlTree100, size1);
+                    searchAVLTreeMap(avlTree1000, size2);
+                    searchAVLTreeMap(avlTree10000, size3);
+                    System.out.println();
+                    searchJavaTreeMap(javaTree100, size1);
+                    searchJavaTreeMap(javaTree1000, size2);
+                    searchJavaTreeMap(javaTree10000, size3);
+                    System.out.println("\n-----\n");
                     break;
                 case "traverse": //go through the entire tree and declare how long it takes to traverse
+                    traverseTreap(treap100, size1);
+                    traverseTreap(treap1000, size2);
+                    traverseTreap(treap1000, size3);
+                    System.out.println();
+                    traverseAVLTreeMap(avlTree100, size1);
+                    traverseAVLTreeMap(avlTree1000, size2);
+                    traverseAVLTreeMap(avlTree10000, size3);
+                    System.out.println();
+                    traverseJavaTree(javaTree100, size1);
+                    traverseJavaTree(javaTree1000, size2);
+                    traverseJavaTree(javaTree10000, size3);
+                    System.out.println("\n-----\n");
                     break;
                 case "remove": //measure how long it takes to remove the entire tree, this is the last switch for an obvious
-                    //Treap
-                    startTimer = System.nanoTime();
-                    for (int i = size1.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
-                        treap100.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed TreapMap with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int i = size2.length; i > 0; i--) {
-                        treap1000.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed TreapMap with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int i = size3.length; i > 0; i--) {
-                        treap10000.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed TreapMap with size 10000: " + (endTimer - startTimer) + " ns\n");
-
-                    startTimer = System.nanoTime();
-                    for (int i = size1.length; i > 0; i--) {
-                        avlTree100.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed AVLTree with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int i = size2.length; i > 0; i--) {
-                        avlTree1000.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed AVLTree with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int i = size3.length; i > 0; i--) {
-                        avlTree10000.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed AVLTree with size 10000: " + (endTimer - startTimer) + " ns\n");
-
-                    //JavaTreeMa[
-                    startTimer = System.nanoTime();
-                    for (int i = size1.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
-                        javaTree100.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed JavaTree with size 100: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int i = size2.length; i > 0; i--) {
-                        javaTree1000.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed JavaTree with size 1000: " + (endTimer - startTimer) + " ns");
-
-                    startTimer = System.nanoTime();
-                    for (int i = size3.length; i > 0; i--) {
-                        javaTree10000.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed JavaTree with size 10000: " + (endTimer - startTimer) + " ns");
-
+                    removeTreap(treap100, size1);
+                    removeTreap(treap1000, size2);
+                    removeTreap(treap10000, size3);
+                    System.out.println();
+                    removeAVLTreeMap(avlTree100, size1);
+                    removeAVLTreeMap(avlTree1000, size2);
+                    removeAVLTreeMap(avlTree10000, size3);
+                    System.out.println();
+                    removeJavaTreeMap(javaTree100, size1);
+                    removeJavaTreeMap(javaTree1000, size2);
+                    removeJavaTreeMap(javaTree10000, size3);
                     break;
                 default: //if none of these strings are met, the program will automatically end via default
                     break;
