@@ -2,21 +2,18 @@ package project20280.tree.comparisons;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
 
-
 import java.util.Random;
 import java.util.TreeMap;
 
-
-
-
 public class PerformanceComparisonPartRand {
+
+    static final int RUNS = 100;
 
     public static void main(String[] args) {
 
         Random rand = new Random();
-        long startTimer, endTimer;
+        long startTimer, endTimer, total;
 
-        //three different trees of each type to demonstrate input response time.
         TreapMap<Integer, Integer> treap100 = new TreapMap<>();
         TreapMap<Integer, Integer> treap1000 = new TreapMap<>();
         TreapMap<Integer, Integer> treap10000 = new TreapMap<>();
@@ -29,189 +26,232 @@ public class PerformanceComparisonPartRand {
         TreeMap<Integer, Integer> javaTree1000 = new TreeMap<>();
         TreeMap<Integer, Integer> javaTree10000 = new TreeMap<>();
 
-        // Created 3 arrays of 3 different sizes
         int[] size1 = new int[100];
         int[] size2 = new int[1000];
         int[] size3 = new int[10000];
 
-        //mode used for switch case, written in string to convey what they do
         String[] mode = {"add", "search", "traverse", "remove"};
 
-        for (int i = 0; i < size1.length; i++) {
-            int binary = rand.nextInt(2); //dictate between whether it plugs a random or ordered value
-            if (binary == 0){
-                size1[i] = i; //inserts ordered value
-            }
-            else{
-                size1[i] = rand.nextInt(10000); //inserts random value
-            }
-        }
+        for (int i = 0; i < size1.length; i++)
+            size1[i] = (rand.nextInt(2) == 0) ? i : rand.nextInt(10000);
+        for (int i = 0; i < size2.length; i++)
+            size2[i] = (rand.nextInt(2) == 0) ? i : rand.nextInt(10000);
+        for (int i = 0; i < size3.length; i++)
+            size3[i] = (rand.nextInt(2) == 0) ? i : rand.nextInt(size1.length / 2, 10000);
 
-        for (int i = 0; i < size2.length; i++) {
-            int binary = rand.nextInt(2);
-            if (binary == 0){
-                size2[i] = i;
-            }
-            else{
-                size2[i] = rand.nextInt(10000);
-            }
-        }
-
-        for (int i = 0; i < size3.length; i++) {
-            int binary = rand.nextInt(2);
-            if (binary == 0){
-                size3[i] = i;
-            }
-            else{
-                size3[i] = rand.nextInt(size1.length/2, 10000);
-            }
-        }
-
-
-        //mode change, this for loop goes through each mode in order
-        for(String currMode : mode){
-            switch(currMode){
-                case "add": //this builds the tree to begin our measurements.
-                    startTimer = System.nanoTime();
-                    for (int value : size1) {
-                        treap100.put(value, value);
+        for (String currMode : mode) {
+            switch (currMode) {
+                case "add":
+                    // --- TreapMap ---
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreapMap<Integer, Integer> temp = new TreapMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size1) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("TreapMap with size 100: " + (endTimer - startTimer) + " ns");
+                    System.out.println("TreapMap with size 100: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime(); //timer is declared again to reset it
-                    for (int value : size2) {
-                        treap1000.put(value, value);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreapMap<Integer, Integer> temp = new TreapMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size2) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("TreapMap with size 1000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("TreapMap with size 1000: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int value : size3) {
-                        treap10000.put(value, value);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreapMap<Integer, Integer> temp = new TreapMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size3) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("TreapMap with size 10000: " + (endTimer - startTimer) + " ns\n");
+                    System.out.println("TreapMap with size 10000: " + (total / RUNS) + " ns\n");
 
-
-                    //AVLTree
-                    startTimer = System.nanoTime();
-                    for (int value : size1) {
-                        avlTree100.put(value, value);
+                    // --- AVLTree ---
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        AVLTreeMap<Integer, Integer> temp = new AVLTreeMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size1) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("AVLTree with size 100: " + (endTimer - startTimer) + " ns");
+                    System.out.println("AVLTree with size 100: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime(); //timer is declared again to reset it
-                    for (int value : size2) {
-                        avlTree1000.put(value, value);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        AVLTreeMap<Integer, Integer> temp = new AVLTreeMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size2) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("AVLTree with size 1000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("AVLTree with size 1000: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int value : size3) {
-                        avlTree10000.put(value, value);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        AVLTreeMap<Integer, Integer> temp = new AVLTreeMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size3) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("AVLTree with size 10000: " + (endTimer - startTimer) + " ns\n");
+                    System.out.println("AVLTree with size 10000: " + (total / RUNS) + " ns\n");
 
-
-                    //JavaTree
-                    startTimer = System.nanoTime();
-                    for (int value : size1) {
-                        javaTree100.put(value, value);
+                    // --- JavaTree ---
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreeMap<Integer, Integer> temp = new TreeMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size1) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("JavaTree with size 100: " + (endTimer - startTimer) + " ns");
+                    System.out.println("JavaTree with size 100: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime(); //timer is declared again to reset it
-                    for (int value : size2) {
-                        javaTree1000.put(value, value);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreeMap<Integer, Integer> temp = new TreeMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size2) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("JavaTree with size 1000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("JavaTree with size 1000: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int value : size3) {
-                        javaTree10000.put(value, value);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreeMap<Integer, Integer> temp = new TreeMap<>();
+                        startTimer = System.nanoTime();
+                        for (int v : size3) temp.put(v, v);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("JavaTree with size 10000: " + (endTimer - startTimer) + " ns\n\n----\n");
+                    System.out.println("JavaTree with size 10000: " + (total / RUNS) + " ns\n\n----\n");
 
+                    // Populate main trees for search phase
+                    for (int v : size1) { treap100.put(v, v); avlTree100.put(v, v); javaTree100.put(v, v); }
+                    for (int v : size2) { treap1000.put(v, v); avlTree1000.put(v, v); javaTree1000.put(v, v); }
+                    for (int v : size3) { treap10000.put(v, v); avlTree10000.put(v, v); javaTree10000.put(v, v); }
                     break;
-                case "search": //search for certain values within the trees, measure both success and unsuccess clicks
+
+                case "search":
                     break;
-                case "traverse": //go through the entire tree and declare how long it takes to traverse
+
+                case "traverse":
                     break;
-                case "remove": //measure how long it takes to remove the entire tree, this is the last switch for an obvious
-                    //Treap
-                    startTimer = System.nanoTime();
-                    for (int i = size1.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
-                        treap100.remove(i);
-                    }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed TreapMap with size 100: " + (endTimer - startTimer) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int i = size2.length; i > 0; i--) {
-                        treap1000.remove(i);
+                case "remove":
+                    // --- TreapMap ---
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreapMap<Integer, Integer> temp = new TreapMap<>();
+                        for (int v : size1) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size1.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed TreapMap with size 1000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("Removed TreapMap with size 100: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int i = size3.length; i > 0; i--) {
-                        treap10000.remove(i);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreapMap<Integer, Integer> temp = new TreapMap<>();
+                        for (int v : size2) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size2.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed TreapMap with size 10000: " + (endTimer - startTimer) + " ns\n");
+                    System.out.println("Removed TreapMap with size 1000: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int i = size1.length; i > 0; i--) {
-                        avlTree100.remove(i);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreapMap<Integer, Integer> temp = new TreapMap<>();
+                        for (int v : size3) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size3.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed AVLTree with size 100: " + (endTimer - startTimer) + " ns");
+                    System.out.println("Removed TreapMap with size 10000: " + (total / RUNS) + " ns\n");
 
-                    startTimer = System.nanoTime();
-                    for (int i = size2.length; i > 0; i--) {
-                        avlTree1000.remove(i);
+                    // --- AVLTree ---
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        AVLTreeMap<Integer, Integer> temp = new AVLTreeMap<>();
+                        for (int v : size1) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size1.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed AVLTree with size 1000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("Removed AVLTree with size 100: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int i = size3.length; i > 0; i--) {
-                        avlTree10000.remove(i);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        AVLTreeMap<Integer, Integer> temp = new AVLTreeMap<>();
+                        for (int v : size2) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size2.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed AVLTree with size 10000: " + (endTimer - startTimer) + " ns\n");
+                    System.out.println("Removed AVLTree with size 1000: " + (total / RUNS) + " ns");
 
-                    //JavaTreeMa[
-                    startTimer = System.nanoTime();
-                    for (int i = size1.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
-                        javaTree100.remove(i);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        AVLTreeMap<Integer, Integer> temp = new AVLTreeMap<>();
+                        for (int v : size3) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size3.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed JavaTree with size 100: " + (endTimer - startTimer) + " ns");
+                    System.out.println("Removed AVLTree with size 10000: " + (total / RUNS) + " ns\n");
 
-                    startTimer = System.nanoTime();
-                    for (int i = size2.length; i > 0; i--) {
-                        javaTree1000.remove(i);
+                    // --- JavaTree ---
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreeMap<Integer, Integer> temp = new TreeMap<>();
+                        for (int v : size1) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size1.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed JavaTree with size 1000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("Removed JavaTree with size 100: " + (total / RUNS) + " ns");
 
-                    startTimer = System.nanoTime();
-                    for (int i = size3.length; i > 0; i--) {
-                        javaTree10000.remove(i);
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreeMap<Integer, Integer> temp = new TreeMap<>();
+                        for (int v : size2) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size2.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
                     }
-                    endTimer = System.nanoTime();
-                    System.out.println("Removed JavaTree with size 10000: " + (endTimer - startTimer) + " ns");
+                    System.out.println("Removed JavaTree with size 1000: " + (total / RUNS) + " ns");
 
+                    total = 0;
+                    for (int run = 0; run < RUNS; run++) {
+                        TreeMap<Integer, Integer> temp = new TreeMap<>();
+                        for (int v : size3) temp.put(v, v);
+                        startTimer = System.nanoTime();
+                        for (int i = size3.length; i > 0; i--) temp.remove(i);
+                        endTimer = System.nanoTime();
+                        total += endTimer - startTimer;
+                    }
+                    System.out.println("Removed JavaTree with size 10000: " + (total / RUNS) + " ns");
                     break;
-                default: //if none of these strings are met, the program will automatically end via default
+
+                default:
                     break;
             }
         }
