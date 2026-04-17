@@ -76,31 +76,45 @@ public class PerformanceComparisonRand {
     }
 
     //traverse method
+    static final int RUNS = 100;
+
     public static void traverseTreap(TreapMap<Integer, Integer> a, int[] b) {
-        long start = System.nanoTime();
-        for (Entry<Integer, Integer> value : a.entrySet()) { //this should iterate through every element present, I used this code: https://www.geeksforgeeks.org/java/how-to-iterate-over-a-treemap-in-java/
-            int i = 1;
+        long total = 0;
+        for (int run = 0; run < RUNS; run++) {
+            long start = System.nanoTime();
+            for (Entry<Integer, Integer> value : a.entrySet()) {
+                int i = 1;
+            }
+            long end = System.nanoTime();
+            total += end - start;
         }
-        long end = System.nanoTime();
-        System.out.println("Traversed TreapMap with size " + b.length + ": " + (end - start) + " ns");
+        System.out.println("Traversed TreapMap with size " + b.length + ": " + (total / RUNS) + " ns");
     }
 
     public static void traverseAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b) {
-        long start = System.nanoTime();
-        for (Entry<Integer, Integer> value : a.entrySet()) { //this should iterate through every element present, I used this code: https://www.geeksforgeeks.org/java/how-to-iterate-over-a-treemap-in-java/
-            int i = 1;
+        long total = 0;
+        for (int run = 0; run < RUNS; run++) {
+            long start = System.nanoTime();
+            for (Entry<Integer, Integer> value : a.entrySet()) {
+                int i = 1;
+            }
+            long end = System.nanoTime();
+            total += end - start;
         }
-        long end = System.nanoTime();
-        System.out.println("Traversed TreapMap with size " + b.length + ": " + (end - start) + " ns");
+        System.out.println("Traversed AVLTreeMap with size " + b.length + ": " + (total / RUNS) + " ns");
     }
 
-    public static void traverseJavaTree(TreeMap<Integer, Integer> a, int[] b){
-        long start = System.nanoTime();
-        for(Map.Entry<Integer, Integer> value : a.entrySet()){ //this should iterate through every element present, I used this code: https://www.geeksforgeeks.org/java/how-to-iterate-over-a-treemap-in-java/
-            int i = 1;
+    public static void traverseJavaTree(TreeMap<Integer, Integer> a, int[] b) {
+        long total = 0;
+        for (int run = 0; run < RUNS; run++) {
+            long start = System.nanoTime();
+            for (Map.Entry<Integer, Integer> value : a.entrySet()) {
+                int i = 1;
+            }
+            long end = System.nanoTime();
+            total += end - start;
         }
-        long end = System.nanoTime();
-        System.out.println("Traversed TreeMap with size " + b.length + ": " + (end - start) +  " ns");
+        System.out.println("Traversed JavaTreeMap with size " + b.length + ": " + (total / RUNS) + " ns");
     }
 
 
@@ -160,16 +174,16 @@ public class PerformanceComparisonRand {
         String[] mode = {"add", "search", "traverse", "remove"};
 
         for (int i = 0; i < size1.length; i++) {
-                size1[i] = rand.nextInt(10000); //inserts random value
+            size1[i] = rand.nextInt(10000); //inserts random value
         }
 
         for (int i = 0; i < size2.length; i++) {
-                size2[i] = rand.nextInt(10000);
+            size2[i] = rand.nextInt(10000);
 
         }
 
         for (int i = 0; i < size3.length; i++) {
-                size3[i] = rand.nextInt(size1.length/2, 10000);
+            size3[i] = rand.nextInt(size1.length/2, 10000);
         }
 
 
@@ -207,7 +221,7 @@ public class PerformanceComparisonRand {
                 case "traverse": //go through the entire tree and declare how long it takes to traverse
                     traverseTreap(treap100, size1);
                     traverseTreap(treap1000, size2);
-                    traverseTreap(treap1000, size3);
+                    traverseTreap(treap10000, size3);
                     System.out.println();
                     traverseAVLTreeMap(avlTree100, size1);
                     traverseAVLTreeMap(avlTree1000, size2);
