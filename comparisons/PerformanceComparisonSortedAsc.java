@@ -163,12 +163,12 @@ public class PerformanceComparisonSortedAsc {
                     startTimer = System.nanoTime();
                     javaTree10000.get(size3[5000]);
                     endTimer = System.nanoTime();
-                    System.out.println("Successful JavaTree Search with size 10000: " + (endTimer - startTimer) + " ns\n");
+                    System.out.println("Successful JavaTree Search with size 10000: " + (endTimer - startTimer) + " ns\n\n");
 
 
                     //failed search
                     startTimer = System.nanoTime();
-                    treap100.get(-1); //this will search for a value referenced in the middle of the array
+                    treap100.get(-1); //this is a number that's not present in any of the trees, might be inconsistent for random.
                     endTimer = System.nanoTime();
                     System.out.println("Failed Treap Search with size 100: " + (endTimer - startTimer) + " ns");
 
