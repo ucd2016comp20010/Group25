@@ -1,6 +1,5 @@
-package project20280.tree.methodcomparisons;
+package project20280.tree.comparisons;
 import project20280.interfaces.Entry;
-import project20280.interfaces.Tree;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
 

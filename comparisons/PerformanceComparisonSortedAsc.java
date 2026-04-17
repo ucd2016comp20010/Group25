@@ -1,4 +1,4 @@
-package project20280.tree.methodcomparisons;
+package project20280.tree.comparisons;
 import project20280.interfaces.Entry;
 import project20280.tree.AVLTreeMap;
 import project20280.tree.TreapMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-public class PerformanceComparisonRand {
+public class PerformanceComparisonSortedAsc {
 
 
     //add methods
@@ -160,16 +160,15 @@ public class PerformanceComparisonRand {
         String[] mode = {"add", "search", "traverse", "remove"};
 
         for (int i = 0; i < size1.length; i++) {
-                size1[i] = rand.nextInt(10000); //inserts random value
+                size1[i] = i; //inserts ordered value
         }
 
         for (int i = 0; i < size2.length; i++) {
-                size2[i] = rand.nextInt(10000);
-
+                size2[i] = i;
         }
 
         for (int i = 0; i < size3.length; i++) {
-                size3[i] = rand.nextInt(size1.length/2, 10000);
+                size3[i] = i;
         }
 
 
