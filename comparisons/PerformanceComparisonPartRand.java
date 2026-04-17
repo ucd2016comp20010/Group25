@@ -6,10 +6,19 @@ import project20280.tree.TreapMap;
 import java.util.Random;
 import java.util.TreeMap;
 
-
-
-
 public class PerformanceComparisonPartRand {
+
+    public static void buildTreeTreap(TreapMap<Integer, Integer> a, int[] b){
+        long start = System.nanoTime();
+        for (int value : b) {
+            a.put(value, value);
+        }
+        long end = System.nanoTime();
+        System.out.println("TreapMap with size " + b.length + " " + (end - start) +  " ns");
+    }
+
+
+
 
     public static void main(String[] args) {
 
