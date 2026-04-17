@@ -206,7 +206,7 @@ public class PerformanceComparisonSortedAsc {
                 case "traverse": //go through the entire tree and declare how long it takes to traverse
                     traverseTreap(treap100, size1);
                     traverseTreap(treap1000, size2);
-                    traverseTreap(treap1000, size3);
+                    traverseTreap(treap10000, size3);
                     System.out.println();
                     traverseAVLTreeMap(avlTree100, size1);
                     traverseAVLTreeMap(avlTree1000, size2);
