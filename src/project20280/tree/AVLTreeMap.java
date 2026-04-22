@@ -17,6 +17,15 @@ public class AVLTreeMap<K, V> extends TreeMap<K, V> {
     /**
      * Returns the height of the given tree position.
      */
+
+    public AVLTreeMap() {
+        super();
+    }
+
+    public AVLTreeMap(Comparator<K> comp) {
+        super(comp);
+    }
+
     protected int height(Position<Entry<K, V>> p) {
         if (p == null || p.getElement() == null) return 0;
         return tree.getAux(p);
