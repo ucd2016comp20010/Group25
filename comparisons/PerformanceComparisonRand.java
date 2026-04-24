@@ -38,41 +38,67 @@ public class PerformanceComparisonRand {
         System.out.println("JavaTreeMap with size " + b.length + ": " + (end - start) + " ns");
     }
 
-    //search methods
-    public static void searchTreap(TreapMap<Integer, Integer> a, int[] b) {
-        long start = System.nanoTime();
-        a.get(b[b.length/2]); //this will search for a value referenced in the middle of the array
-        long end = System.nanoTime();
-        System.out.println("Successful JavaTree Search with size " + b.length + ": " + (end - start) + " ns");
+    // search methods
+    static final int SEARCH_RUNS = 500;
 
-        start = System.nanoTime();
-        a.get(-1); //this is a number that's not present in any of the trees, might be inconsistent for random.
-        end = System.nanoTime();
-        System.out.println("Failed Treap Search with size " + b.length + ": " + (end - start) + " ns");
+    public static void searchTreap(TreapMap<Integer, Integer> a, int[] b) {
+        long total = 0;
+        for (int run = 0; run < SEARCH_RUNS; run++) {
+            long start = System.nanoTime();
+            a.get(b[b.length / 2]);
+            total += System.nanoTime() - start;
+        }
+        System.out.println("Successful Treap Search with size " + b.length
+                + ": " + (total / SEARCH_RUNS) + " ns (avg over " + SEARCH_RUNS + " runs)");
+
+        total = 0;
+        for (int run = 0; run < SEARCH_RUNS; run++) {
+            long start = System.nanoTime();
+            a.get(-1);
+            total += System.nanoTime() - start;
+        }
+        System.out.println("Failed Treap Search with size " + b.length
+                + ": " + (total / SEARCH_RUNS) + " ns (avg over " + SEARCH_RUNS + " runs)");
     }
 
     public static void searchAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b) {
-        long start = System.nanoTime();
-        a.get(b[b.length/2]);
-        long end = System.nanoTime();
-        System.out.println("Successful JavaTree Search with size " + b.length + ": " + (end - start) + " ns");
+        long total = 0;
+        for (int run = 0; run < SEARCH_RUNS; run++) {
+            long start = System.nanoTime();
+            a.get(b[b.length / 2]);
+            total += System.nanoTime() - start;
+        }
+        System.out.println("Successful AVLTree Search with size " + b.length
+                + ": " + (total / SEARCH_RUNS) + " ns (avg over " + SEARCH_RUNS + " runs)");
 
-        start = System.nanoTime();
-        a.get(-1);
-        end = System.nanoTime();
-        System.out.println("Failed Treap Search with size " + b.length + ": " + (end - start) + " ns");
+        total = 0;
+        for (int run = 0; run < SEARCH_RUNS; run++) {
+            long start = System.nanoTime();
+            a.get(-1);
+            total += System.nanoTime() - start;
+        }
+        System.out.println("Failed AVLTree Search with size " + b.length
+                + ": " + (total / SEARCH_RUNS) + " ns (avg over " + SEARCH_RUNS + " runs)");
     }
 
     public static void searchJavaTreeMap(TreeMap<Integer, Integer> a, int[] b) {
-        long start = System.nanoTime();
-        a.get(b[b.length/2]);
-        long end = System.nanoTime();
-        System.out.println("Successful JavaTree Search with size " + b.length + ": " + (end - start) + " ns");
+        long total = 0;
+        for (int run = 0; run < SEARCH_RUNS; run++) {
+            long start = System.nanoTime();
+            a.get(b[b.length / 2]);
+            total += System.nanoTime() - start;
+        }
+        System.out.println("Successful JavaTree Search with size " + b.length
+                + ": " + (total / SEARCH_RUNS) + " ns (avg over " + SEARCH_RUNS + " runs)");
 
-        start = System.nanoTime();
-        a.get(-1);
-        end = System.nanoTime();
-        System.out.println("Failed Treap Search with size " + b.length + ": " + (end - start) + " ns");
+        total = 0;
+        for (int run = 0; run < SEARCH_RUNS; run++) {
+            long start = System.nanoTime();
+            a.get(-1);
+            total += System.nanoTime() - start;
+        }
+        System.out.println("Failed JavaTree Search with size " + b.length
+                + ": " + (total / SEARCH_RUNS) + " ns (avg over " + SEARCH_RUNS + " runs)");
     }
 
     //traverse method
@@ -119,31 +145,52 @@ public class PerformanceComparisonRand {
 
 
     //remove method
-    public static void removeTreap(TreapMap<Integer, Integer> a, int[] b){
+    public static void removeTreap(TreapMap<Integer, Integer> a, int[] b) {
         long start = System.nanoTime();
-        for (int i = b.length; i > 0; i--) { //the for loop uses the array as a reference to remove values
-            a.remove(i);
+        for (int value : b) {
+            a.remove(value);
         }
         long end = System.nanoTime();
-        System.out.println("Removed TreapMap with size " + b.length + ": " + (end - start) +  " ns");
+        System.out.println("Removed TreapMap with size " + b.length + ": " + (end - start) + " ns");
     }
 
-    public static void removeAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b){
+    public static void removeAVLTreeMap(AVLTreeMap<Integer, Integer> a, int[] b) {
         long start = System.nanoTime();
-        for (int i = b.length; i > 0; i--) {
-            a.remove(i);
+        for (int value : b) {
+            a.remove(value);
         }
         long end = System.nanoTime();
-        System.out.println("Removed AVLTreeMap with size " + b.length + ": " + (end - start) +  " ns");
+        System.out.println("Removed AVLTreeMap with size " + b.length + ": " + (end - start) + " ns");
     }
 
     public static void removeJavaTreeMap(TreeMap<Integer, Integer> a, int[] b) {
         long start = System.nanoTime();
-        for (int i = b.length; i > 0; i--) {
-            a.remove(i);
+        for (int value : b) {
+            a.remove(value);
         }
         long end = System.nanoTime();
         System.out.println("Removed JavaTreeMap with size " + b.length + ": " + (end - start) + " ns");
+    }
+
+    private static void warmup(int[] size1, int[] size2, int[] size3) {
+        // Build and discard throwaway trees to trigger JIT compilation
+        // before any timed measurements begin.
+        for (int pass = 0; pass < 3; pass++) {
+            TreapMap<Integer, Integer> t1 = new TreapMap<>();
+            for (int v : size1) t1.put(v, v);
+            TreapMap<Integer, Integer> t2 = new TreapMap<>();
+            for (int v : size2) t2.put(v, v);
+
+            AVLTreeMap<Integer, Integer> a1 = new AVLTreeMap<>();
+            for (int v : size1) a1.put(v, v);
+            AVLTreeMap<Integer, Integer> a2 = new AVLTreeMap<>();
+            for (int v : size2) a2.put(v, v);
+
+            TreeMap<Integer, Integer> j1 = new TreeMap<>();
+            for (int v : size1) j1.put(v, v);
+            TreeMap<Integer, Integer> j2 = new TreeMap<>();
+            for (int v : size2) j2.put(v, v);
+        }
     }
 
 
@@ -183,8 +230,10 @@ public class PerformanceComparisonRand {
         }
 
         for (int i = 0; i < size3.length; i++) {
-            size3[i] = rand.nextInt(size1.length/2, 10000);
+            size3[i] = rand.nextInt(10000);
         }
+
+        warmup(size1, size2, size3);
 
 
         //mode change, this for loop goes through each mode in order
