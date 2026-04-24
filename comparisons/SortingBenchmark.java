@@ -135,14 +135,6 @@ public class SortingBenchmark {
         return total / TIMED_RUNS;
     }
 
-    /**
-     * Approximate heap delta in bytes.
-     *
-     * Calls System.gc() before measuring to reduce GC noise. This is a
-     * best-effort estimate — the JVM may GC during the call. Treat as
-     * indicative rather than exact. Analytical complexity estimates in the
-     * report are more reliable.
-     */
     // for space complexity - gets the heap delta in bytes (change in amount of memory free before->after sort).
     static long memSort(Sorter s, int[] data) {
         System.gc();
@@ -183,6 +175,8 @@ public class SortingBenchmark {
         return d;
     }
 
+    // everything above coded by hand - below, for formatting etc, Claude was used to save time (we all hate print
+    // statement formatting)
     public static void main(String[] args) {
         Random rnd = new Random(42); // fixed seed — rerun gives identical data
 
